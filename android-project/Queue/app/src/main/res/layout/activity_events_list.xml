@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="com.ahmadssb.queue.EventsList">
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/select_event"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+                <Button
+                    android:id="@+id/btnCreateEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/newEvent" />
+            </LinearLayout>
+
+                <ListView
+                    android:id="@+id/lvEventsList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:textDirection="rtl">
+                </ListView>
+</LinearLayout>
