@@ -8,8 +8,8 @@ android {
         applicationId "com.ahmadssb.queueozbah"
         minSdkVersion 18
         targetSdkVersion 22
-        versionCode 11
-        versionName "2.2"
+        versionCode 12
+        versionName "2.3"
     }
     buildTypes {
         release {

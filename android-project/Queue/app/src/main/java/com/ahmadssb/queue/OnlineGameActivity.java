@@ -393,16 +393,16 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
             builder.setNegativeButton(R.string.p4set, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     // User clicked Next Game Button
-                    if (!_currentList.isEmpty()){
-                        ChangeGameSetPlayers(mContext,TWO_PLAYERS, _currentList, _waitingList, countGames);
+                    if (!_currentList.isEmpty()) {
+                        ChangeGameSetPlayers(mContext, TWO_PLAYERS, _currentList, _waitingList, countGames);
 
-                    }else{
+                    } else {
 
                         PLAYER_SET = FOUR_PLAYERS;
                         tinydb.putInt("PLAYER_SET", FOUR_PLAYERS);
                         PLAYER_SET = tinydb.getInt("PLAYER_SET", FOUR_PLAYERS);
-                        Toast.makeText(mContext,getString(R.string.current_player_message)+ PLAYER_SET, Toast.LENGTH_LONG ).show();
-                        Log.d("PLAYER_SET_4", getString(R.string.current_player_message)+ PLAYER_SET);
+                        Toast.makeText(mContext, getString(R.string.current_player_message) + PLAYER_SET, Toast.LENGTH_LONG).show();
+                        Log.d("PLAYER_SET_4", getString(R.string.current_player_message) + PLAYER_SET);
 
                     }
 
@@ -556,9 +556,20 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
 
     public void loadArrayListTinyDB (Context mContext, ArrayList<String> currentList, ArrayList<String> waitingList) {
         TinyDB tinydb = new TinyDB(mContext);
-        this.PLAYER_SET = tinydb.getInt("PLAYER_SET", DEFAULT);
+
         this.waitingList = tinydb.getListString("waitingListtinydb");
         this.currentList = tinydb.getListString("currentListtinydb");
+
+        if(this.currentList.size() > 2){
+            tinydb.putInt("PLAYER_SET", FOUR_PLAYERS);
+        }else if(this.currentList.size() == 2){
+            tinydb.putInt("PLAYER_SET", TWO_PLAYERS);
+        }else{
+            tinydb.putInt("PLAYER_SET", DEFAULT);
+        }
+        this.PLAYER_SET = tinydb.getInt("PLAYER_SET", DEFAULT);
+        Log.d("PLAYER_SET",""+PLAYER_SET );
+        Log.d("currentList.size()",""+this.currentList.size() );
         countGames = tinydb.getInt("count_games", countGames);
         this.isFirstGame = tinydb.getBoolean("isFirstGame",false);
 
@@ -809,7 +820,6 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
             }
 
 
-
             return null;
         }
 
@@ -817,7 +827,7 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String file_url) {
             super.onPostExecute(file_url);
             pDialog.dismiss();
-            Toast.makeText(OnlineGameActivity.this,file_url, Toast.LENGTH_LONG).show();
+            //Toast.makeText(OnlineGameActivity.this,file_url, Toast.LENGTH_LONG).show();
 
             if(PLAYER_SET == TWO_PLAYERS && currentList.size() == 4){
                 waitingList.add(0,currentList.get(3));
@@ -825,21 +835,25 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
 
                 currentList.remove(2);
                 currentList.remove(2);
+                tinydb.putInt("PLAYER_SET", TWO_PLAYERS);
+
             } else if(PLAYER_SET == FOUR_PLAYERS && currentList.size() == 2 && waitingList.size() >= 2){
                 currentList.add(waitingList.get(0));
                 currentList.add(waitingList.get(1));
 
                 waitingList.remove(0);
                 waitingList.remove(0);
-            }else if(PLAYER_SET == FOUR_PLAYERS && currentList.size() == 2 && waitingList.size() < 2){
 
+                tinydb.putInt("PLAYER_SET", FOUR_PLAYERS);
+
+            }else if(PLAYER_SET == FOUR_PLAYERS && currentList.size() == 2 && waitingList.size() < 2){
                 waitingList.add(0,currentList.get(1));
                 waitingList.add(0,currentList.get(0));
                 currentList.remove(0);
                 currentList.remove(0);
-
+                tinydb.putInt("PLAYER_SET", DEFAULT);
             }
-
+            PLAYER_SET = tinydb.getInt("PLAYER_SET", DEFAULT);
             adapterCurrent.notifyDataSetChanged();
             adapterWaiting.notifyDataSetChanged();
         }
@@ -998,7 +1012,6 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
 
         //selectGameSet(OnlineGameActivity.this,currentList,waitingList,countGames);
 
-        Toast.makeText(getApplicationContext(),""+tinydb.getInt("PLAYER_SET", DEFAULT),Toast.LENGTH_LONG).show();
 
 
         tvCurrent = (TextView) findViewById(R.id.textView);
