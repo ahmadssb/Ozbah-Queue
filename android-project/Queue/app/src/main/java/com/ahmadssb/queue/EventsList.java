@@ -64,9 +64,13 @@ public class EventsList extends AppCompatActivity implements View.OnClickListene
     public static final String URL_SELECT_EVENT = "http://192.168.1.111/ozbah/GoogleDrive/Code-Projects/Web/_AHMADSSB/php-web-services/selectEvent.php";
 
     private SharedPreferences sharedPref;
-    private int changelogversionCode = 12;
+    private int changelogversionCode = 14;
     private boolean isChangeLogDisplayed = false;
+
+    // Just Temporary I am typing Arabic Message here instead of String XML
     private String changeLogTitle = "التغييرات الجديدة في التحديث الجديد";
+
+    // Just Temporary I am typing Arabic Message here instead of String XML
     private String changeLogMessage = "\n" +
             "** التغييرات الجديدة في التحديث الجديد:\n" +
             "2.4:\n" +
