@@ -50,7 +50,7 @@ import java.util.List;
 public class OnlineGameActivity extends AppCompatActivity implements View.OnClickListener, NfcAdapter.CreateNdefMessageCallback {
     private ListView lvCurrent, lvWaiting;
     private GridView gvCurrent, gvWaiting;
-    private Button btnAdd, btnRemove, btnLoad, btnChangeGameSet;
+    private Button btnAdd, btnRemove, btnLoad, btnRemoveUsers;
     private TextView tvFirstGame, tvP1P3vsP2P4 , tvCurrent;
     private CheckBox cbSpecialCase;
     static final boolean isChecked = false;
@@ -102,9 +102,11 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
 
 //    public static final String URL_USERS_LIST = "http://YOUR-WEBSITE-LINK/ozbah/usersList.php";
 //    public static final String URL_REGISTER_USERSS = "http://YOUR-WEBSITE-LINK/ozbah/registerUsers.php";
+//    public static final String URL_REMOVE_EVENT_USERSS = "http://YOUR-WEBSITE-LINK/ozbah/deleteEventUsers.php";
 
     public static final String URL_USERS_LIST = "http://192.168.1.111/GoogleDrive/Code-Projects/Web/_AHMADSSB/ozbah/php-web-services/usersList.php";
     public static final String URL_REGISTER_USERSS = "http://192.168.1.111/GoogleDrive/Code-Projects/Web/_AHMADSSB/ozbah/php-web-services/registerUsers.php";
+    public static final String URL_REMOVE_EVENT_USERSS = "http://192.168.1.111/GoogleDrive/Code-Projects/Web/_AHMADSSB/ozbah/php-web-services/deleteEventUsers.php";
 
     private SharedPreferences sharedPref;
 
@@ -859,6 +861,74 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    class RemoveEventUsers extends AsyncTask<String, String, String> {
+        TinyDB tinydb = new TinyDB(OnlineGameActivity.this);
+        int status;
+
+        SharedPreferences sp = getSharedPreferences(getPackageName(), 0);
+        String eventid = sp.getString("eventid",null);
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(OnlineGameActivity.this);
+            pDialog.setMessage(getString(R.string.removing_event_users));
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            alUsersList = new ArrayList<HashMap<String, String>>();
+
+            try {
+
+                JSONParser jParser = new JSONParser();
+                // Building Parameters
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair(TAG_EVENT_ID, eventid));
+
+                Log.d("request!", "starting New Event");
+                Log.d(TAG_EVENT_ID, eventid);
+
+                JSONObject json = jParser.makeHttpRequest(URL_REMOVE_EVENT_USERSS, "POST", params);
+                Log.d("Loading Data attempt", json.toString());
+
+                this.status = json.getInt(TAG_SUCCESS);
+
+                if(this.status == 1){
+                    Log.d("status = 1: ", json.toString());
+                    currentList.clear();
+                    waitingList.clear();
+                    loadArrayListTinyDB(OnlineGameActivity.this, currentList, waitingList);
+
+                    return json.getString(TAG_MESSAGE);
+                }else{
+                    Log.d("event status != 1", json.toString());
+
+                    return json.getString(TAG_MESSAGE);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String file_url) {
+            super.onPostExecute(file_url);
+            pDialog.dismiss();
+            //Toast.makeText(OnlineGameActivity.this,file_url, Toast.LENGTH_LONG).show();
+            new LoadGame().execute();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -988,7 +1058,7 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnRemove = (Button) findViewById(R.id.btnGame);
-        btnChangeGameSet =  (Button) findViewById(R.id.btnChangeGameSet);
+        btnRemoveUsers =  (Button) findViewById(R.id.btnRemoveUsers);
         btnLoad = (Button) findViewById(R.id.btnLoad);
 
         findViewById(R.id.btnShare).setOnClickListener(new View.OnClickListener() {
@@ -1025,10 +1095,10 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
         });
 
 
-        findViewById(R.id.btnChangeGameSet).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnRemoveUsers).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectGameSet(OnlineGameActivity.this, currentList, waitingList, countGames);
+                new RemoveEventUsers().execute();
             }
         });
 
