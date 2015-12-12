@@ -3,6 +3,7 @@ package com.ahmadssb.queue;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -63,6 +64,69 @@ public class EventsList extends AppCompatActivity implements View.OnClickListene
     public static final String URL_SELECT_EVENT = "http://192.168.1.111/ozbah/GoogleDrive/Code-Projects/Web/_AHMADSSB/php-web-services/selectEvent.php";
 
     private SharedPreferences sharedPref;
+    private int changelogversionCode = 12;
+    private boolean isChangeLogDisplayed = false;
+    private String changeLogTitle = "التغييرات الجديدة في التحديث الجديد";
+    private String changeLogMessage = "\n" +
+            "** التغييرات الجديدة في التحديث الجديد:\n" +
+            "2.4:\n" +
+            "- إضافة زر حذف قائمة اللاعبين.\n" +
+            "- تعديل وتحديث كود التطبيق مع آخر التحديثات بالسيرفر ونظام الأندرويد.\n" +
+            "- إصلاح مشكلة ظهور رسالة \"OOPS, Something Went Wrong\" (نهائيا)\n" +
+            "\n" +
+            "2.3: \n" +
+            "- إصلاح مشكلة ظهور رسالة \"OOPS, Something Went Wrong\" عند النقر على زر \"التالي\" أو إضافة لاعب جديد\n" +
+            "\n" +
+            "2.2:\n" +
+            "- قائمة اختيار العزبة  أصبحت الشاشة الرئيسية مع إضافة زر لاستخدام التطبيق أوفلاين\n" +
+            "- تفعيل جميع الأزارير عند الضغط على زر القائمة بجميع الشاشات\n" +
+            "\n" +
+            "2.01 :\n" +
+            "- إصلاح خطأ الترتيب عند حذف اسم من قائمة اللاعبين النشطون يصبح ترتيب اللاعب المضاف بعد الاعب الموجود مسبقا\n" +
+            "- تفعيل زر العودة إلى اللعب أوفلاين لحفظ البيانات على الجهاز فقط.\n" +
+            "\n" +
+            "2.0: ** النسخة تحت التجربة **\n" +
+            "-اناجة حفظ واسترجاع بيانات  اللعبة أونلاين \n" +
+            "-بإمكان اللاعب إضافة عزبة جديدة ووضع كلمة مرور علىيها\n" +
+            "-للدخول إلى الغزية يجب على المستخدم وضع كلمة المرور الخاصة بتلك العزبة\n" +
+            "-حفظ البيانات أونلاين وإسترجاعها مباشرة على جميع الأجهزة.\n" +
+            "** تنبيه عند دخول المستخدم للعزبة المختارة عليه الضغط أولا على زر \"إسترجاع\" أو \"Load\" كي لا يقون بخذف القائمة الموجودة مسبقا **\n" +
+            "- إضافة زر المشاركة (لمشاركة أسماء قائمة الللاعبين النشطون و قائمة الانتظار خلال البرامج الاخرى)\n" +
+            "\n" +
+            "1.7:\n" +
+            "- تغيير شكل القوائم إلى عامودان كل صف عبارة عن فريق \n" +
+            "- إصلاح زل تعديل اسم اللاعب في قائمة اللاعبون النشطون\n" +
+            "\n" +
+            "\n" +
+            "1.6:\n" +
+            "- طبظ وتثبيت مقاسات قامة اللاعبين النشطين كي لا تصغر المساحة حين إضافة لاعبين جدد.\n" +
+            "- التمهيد لتغيير شكل قائمة اللاعبين النشيطين لتأخذ مساحة أقل بقائمة أفقية\n" +
+            "\n" +
+            "1.5:\n" +
+            "- إصلاح اسعادة اللعبة الأولى عند الضغط على زر \"استرجاع\" \n" +
+            "- إضافة إعلانات Google AdMob (فقط) عند إغلاق التطبيق\n" +
+            "- إصلاح خطأ إغلاق التطبيق عند النقر على زر \"استرجاع\"\n" +
+            "- إصلاح حفظ و استرجاع البيانات على التطبيق (تظهر الان بالترتيب الصحيح)\n" +
+            "\n" +
+            "1.4:\n" +
+            "- السماح للمستخدم باختيار عدد اللاعبين في اللعبة الواحدة (إما 2 أو 4) \n" +
+            "- عند تغيير عدد اللاعبين يقوم البرنامج مباشرة ب‘بترتيب اللاعبين النشطاء و من بقائمة الإنتظار تلقائيا حتى في حالة استرجاع لعبة سابقة\n" +
+            "- عند تغيير عدد اللاعبين من 2 الى 4 يتم احتساب اللعبة كأول لعبة.\n" +
+            "- إضافة زر تعديل ترتيب اللاعب قبل أي من اللاعبين بقائمة الإنتظار (تعديل الترتيب وليس استبدال أماكن اللاعبين)";
+    public void showAlert(String title, String message, Context con) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(con);
+        //dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
+
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -198,6 +262,17 @@ public class EventsList extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_events_list);
 
         this.sharedPref = getSharedPreferences(getPackageName(), 0);
+
+        isChangeLogDisplayed = this.sharedPref.getBoolean("isChangeLogDisplayed_"+changelogversionCode,false);
+
+        if (!isChangeLogDisplayed){
+            showAlert(changeLogTitle, changeLogMessage,EventsList.this);
+            SharedPreferences.Editor edit = sharedPref.edit();
+            edit.putBoolean("isChangeLogDisplayed_"+changelogversionCode, true);
+            edit.putInt("changelogversionCode", changelogversionCode);
+            edit.commit();
+
+        }
 
 
         findViewById(R.id.btnCreateEvent).setOnClickListener(new View.OnClickListener() {
