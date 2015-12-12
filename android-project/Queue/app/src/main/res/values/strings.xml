@@ -70,5 +70,6 @@
     <string name="loading_data_online">Loading Data Online …</string>
     <string name="action_offline">Offline</string>
     <string name="action_offline_description">Saving Data Only On This Device</string>
+    <string name="removeUsers">Remove Users</string>
 
 </resources>

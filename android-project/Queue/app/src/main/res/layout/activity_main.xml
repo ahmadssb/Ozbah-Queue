@@ -38,10 +38,10 @@
                     android:text="@string/game" />
 
                 <Button
-                    android:id="@+id/btnChangeGameSet"
+                    android:id="@+id/btnDeleteUsers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/gameSet" />
+                    android:text="@string/removeUsers" />
 
                 <Button
                     android:id="@+id/btnLoad"
