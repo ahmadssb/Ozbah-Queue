@@ -594,8 +594,8 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
     }
     private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
-                //.addTestDevice(getString(R.string.device_id))
-                .addTestDevice("")
+//                .addTestDevice("SEE_YOUR_LOGCAT_TO_GET_YOUR_DEVICE_ID")
+                .addTestDevice(getString(R.string.device_id))
                 .build();
 
         mInterstitialAd.loadAd(adRequest);

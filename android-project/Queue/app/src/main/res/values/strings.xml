@@ -44,8 +44,8 @@
     <string name="position">Change Position</string>
     <string name="change_position">Select New Position</string>
     <string name="change_position_message">Set The Selected Player (Before) One Of The Folowing Players:</string>
-    <string name="banner_ad_unit_id" translatable="false">SET-YOUR-AD-UNIT-ID</string>
-    <string name="device_id" translatable="false">SET-YOUR-DEVICE-ID</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9702151899060730/9137172002</string>
+    <string name="device_id" translatable="false">24D5E40D4DAF8232BBDFD6B25180F555</string>
     <string name="player">Player</string>
     <string name="title_activity_analytics_application" translatable="false">AnalyticsApplication</string>
     <string name="downloadapp">Download Ozbah App From Android Play Store \n https://play.google.com/store/apps/details?id=com.ahmadssb.queueozbah</string>
