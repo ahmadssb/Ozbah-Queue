@@ -100,11 +100,11 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
     public static final String TAG_CURRENT = "current";
     public static final String TAG_WAITING = "waiting";
 
-    public static final String URL_USERS_LIST = "http://YOUR-WEBSITE-LINK/ozbah/usersList.php";
-    public static final String URL_REGISTER_USERSS = "http://YOUR-WEBSITE-LINK/ozbah/registerUsers.php";
+//    public static final String URL_USERS_LIST = "http://YOUR-WEBSITE-LINK/ozbah/usersList.php";
+//    public static final String URL_REGISTER_USERSS = "http://YOUR-WEBSITE-LINK/ozbah/registerUsers.php";
 
-//    public static final String URL_USERS_LIST = "http://192.168.1.111/ozbah/php-web-services/usersList.php";
-//    public static final String URL_REGISTER_USERSS = "http://192.168.1.111/ozbah/php-web-services/registerUsers.php";
+    public static final String URL_USERS_LIST = "http://192.168.1.111/GoogleDrive/Code-Projects/Web/_AHMADSSB/ozbah/php-web-services/usersList.php";
+    public static final String URL_REGISTER_USERSS = "http://192.168.1.111/GoogleDrive/Code-Projects/Web/_AHMADSSB/ozbah/php-web-services/registerUsers.php";
 
     private SharedPreferences sharedPref;
 

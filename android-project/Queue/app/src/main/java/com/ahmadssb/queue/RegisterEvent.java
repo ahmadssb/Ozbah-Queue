@@ -42,7 +42,7 @@ public class RegisterEvent extends AppCompatActivity implements View.OnClickList
     public static final String TAG_EVENT_NAME = "event_name";
     public static final String TAG_EVENT_PASSWORD = "event_password";
 
-    public static final String URL_EVENTS_LIST = "http://192.168.1.27/GoogleDrive/ozbah/eventsList.php";
+    public static final String URL_EVENTS_LIST = "http://192.168.1.111/GoogleDrive/ozbah/eventsList.php";
     public static final String URL_REGISTER_NEW_EVENT = "http://localhost/GoogleDrive/ozbah/registerEvent.php";
 
     private SharedPreferences sharedPref;

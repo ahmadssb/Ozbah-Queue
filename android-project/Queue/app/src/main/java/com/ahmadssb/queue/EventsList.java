@@ -54,13 +54,13 @@ public class EventsList extends AppCompatActivity implements View.OnClickListene
     public static final String TAG_EVENT_NAME = "event_name";
     public static final String TAG_EVENT_PASSWORD = "event_password";
 
-    public static final String URL_EVENTS_LIST = "http://YOUR-WEBSITE-LINK/ozbah/eventsList.php";
-    public static final String URL_REGISTER_NEW_EVENT = "http://YOUR-WEBSITE-LINK/ozbah/registerEvent.php";
-    public static final String URL_SELECT_EVENT = "http://YOUR-WEBSITE-LINK/ozbah/selectEvent.php";
+//    public static final String URL_EVENTS_LIST = "http://YOUR-WEBSITE-LINK/ozbah/eventsList.php";
+//    public static final String URL_REGISTER_NEW_EVENT = "http://YOUR-WEBSITE-LINK/ozbah/registerEvent.php";
+//    public static final String URL_SELECT_EVENT = "http://YOUR-WEBSITE-LINK/ozbah/selectEvent.php";
 
-//    public static final String URL_EVENTS_LIST = "http://192.168.1.111/ozbah/php-web-services/eventsList.php";
-//    public static final String URL_REGISTER_NEW_EVENT = "http://192.168.1.111/ozbah/php-web-services/registerEvent.php";
-//    public static final String URL_SELECT_EVENT = "http://192.168.1.111/ozbah/php-web-services/selectEvent.php";
+    public static final String URL_EVENTS_LIST = "http://192.168.1.111/GoogleDrive/Code-Projects/Web/_AHMADSSB/ozbah/php-web-services/eventsList.php";
+    public static final String URL_REGISTER_NEW_EVENT = "http://192.168.1.111/GoogleDrive/Code-Projects/Web/_AHMADSSB/ozbah/php-web-services/registerEvent.php";
+    public static final String URL_SELECT_EVENT = "http://192.168.1.111/ozbah/GoogleDrive/Code-Projects/Web/_AHMADSSB/php-web-services/selectEvent.php";
 
     private SharedPreferences sharedPref;
 
