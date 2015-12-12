@@ -899,6 +899,8 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
             isGameSaved = pref.getBoolean("isGameSaved", false);
             Log.d("isGameSaved", "" + isGameSaved);
             new LoadGame().execute();
+        }else if(id == R.id.action_switch_game){
+            selectGameSet(OnlineGameActivity.this, currentList, waitingList, countGames);
         }else if(id == R.id.action_insert){
             dialog = new Dialog(OnlineGameActivity.this);
             dialog.setContentView(R.layout.layout);
