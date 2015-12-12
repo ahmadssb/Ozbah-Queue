@@ -61,4 +61,6 @@
     <string name="saving_data_online">جاري حفظ البيانات ...</string>
     <string name="action_offline">أوفلاين</string>
     <string name="action_offline_description">حفظ البيانات على هذا الجهاز فقط</string>
+    <string name="removeUsers">حذف</string>
+    <string name="removing_event_users">جاري حذف جميع اللاعبين ...</string>
 </resources>
