@@ -32,7 +32,12 @@ if(!empty($_POST)){
 	$rows = $stmt->fetchAll();
 
 if ($rows){
-$query = "DELETE FROM `ozbah_users` WHERE `user_event_id` = :eventid;";
+$query = "UPDATE `ozbah_users` 
+SET 
+`user_name`='',
+`user_name_temp`=''
+WHERE 
+`user_event_id` = :eventid;";
 	
 	$query_params = array(
         ':eventid' => $_POST['user_event_id']
@@ -50,19 +55,21 @@ $query = "DELETE FROM `ozbah_users` WHERE `user_event_id` = :eventid;";
     }
 	
     $response["success"] = 1;
-    $response["message"] = "Username Successfully Added";
+    $response["message"] = "Users Successfully Removed";
     echo json_encode($response);
-}else{
+}}else{
     ?>
 
-<h1>Register User</h1>
-<form action="deleteEventUsers.php" method="post">
-	user_event_id: <br/>
-    <input type="text" name="user_event_id" placeholder="user_event_id"/><br/>
-    <br/>
-	<input type="submit" value="Delete Event User"/>
-</form>
-<?php
+    <h1>Register User</h1>
+    <form action="deleteEventUsers.php" method="post">
+        user_event_id:
+        <br/>
+        <input type="text" name="user_event_id" placeholder="user_event_id" />
+        <br/>
+        <br/>
+        <input type="submit" value="Delete Event User" />
+    </form>
+    <?php
 }
 
 ?>
