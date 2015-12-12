@@ -695,6 +695,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             isGameSaved = pref.getBoolean("isGameSaved", false);
             Log.d("isGameSaved", "" + isGameSaved);
             new LoadGame().execute();
+        }else if(id == R.id.action_switch_game){
+            selectGameSet(MainActivity.this, currentList, waitingList, countGames);
         }else if(id == R.id.action_insert){
             dialog = new Dialog(MainActivity.this);
             dialog.setContentView(R.layout.layout);
