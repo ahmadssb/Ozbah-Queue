@@ -1064,7 +1064,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }else if(PLAYER_SET == FOUR_PLAYERS){
                         setGame4Players(MainActivity.this, currentList, waitingList,  countGames);
                     }else {
-                        Toast.makeText(getApplicationContext(),R.string.someting_went_wrong,Toast.LENGTH_LONG).show();
+                        selectGameSet(MainActivity.this,currentList,waitingList,countGames);
                     }
 
 

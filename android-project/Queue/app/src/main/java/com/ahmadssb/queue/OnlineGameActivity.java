@@ -1324,7 +1324,7 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
                 } else if (PLAYER_SET == FOUR_PLAYERS) {
                     setGame4Players(OnlineGameActivity.this, currentList, waitingList, countGames);
                 } else {
-                    Toast.makeText(getApplicationContext(), R.string.someting_went_wrong, Toast.LENGTH_LONG).show();
+                    selectGameSet(OnlineGameActivity.this, currentList, waitingList, countGames);
                 }
 
             }
