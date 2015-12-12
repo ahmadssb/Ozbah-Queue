@@ -43,7 +43,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NfcAdapter.CreateNdefMessageCallback {
     private ListView lvCurrent, lvWaiting;
     private GridView gvCurrent, gvWaiting;
-    private Button btnAdd, btnRemove, btnLoad, btnChangeGameSet;
+    private Button btnAdd, btnRemove, btnLoad, btnRemoveUsers;
     private TextView tvFirstGame, tvP1P3vsP2P4 , tvCurrent;
     private CheckBox cbSpecialCase;
     static final boolean isChecked = false;
@@ -787,7 +787,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnRemove = (Button) findViewById(R.id.btnGame);
-        btnChangeGameSet =  (Button) findViewById(R.id.btnChangeGameSet);
+        btnRemoveUsers =  (Button) findViewById(R.id.btnRemoveUsers);
         btnLoad = (Button) findViewById(R.id.btnLoad);
 
         tvFirstGame = (TextView) findViewById(R.id.tvP1P3vsP2P4);
@@ -818,10 +818,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-        findViewById(R.id.btnChangeGameSet).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnRemoveUsers).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectGameSet(MainActivity.this,currentList,waitingList,countGames);
+                currentList.clear();
+                waitingList.clear();
+                countGames = 0;
+                saveArrayListTinyDB(MainActivity.this, currentList, waitingList, countGames);
+                new LoadGame().execute();
+
+//                selectGameSet(MainActivity.this,currentList,waitingList,countGames);
             }
         });
         findViewById(R.id.btnShare).setOnClickListener(new View.OnClickListener() {
