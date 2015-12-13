@@ -35,7 +35,8 @@ if ($rows){
 $query = "UPDATE `ozbah_users` 
 SET 
 `user_name`='',
-`user_name_temp`=''
+`user_name_temp`='',
+`user_modifiedon`= now()
 WHERE 
 `user_event_id` = :eventid;";
 	

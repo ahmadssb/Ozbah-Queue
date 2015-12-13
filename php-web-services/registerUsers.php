@@ -48,7 +48,7 @@ $query = "DELETE FROM `ozbah_users` WHERE `user_event_id` = :eventid;
         ':currentnames' => $_POST['current'],
         ':waitingnames' => $_POST['waiting'],
         ':eventid' => $_POST['user_event_id'],
-		':modifiedon' => "CURRENT_TIMESTAMP"
+		':modifiedon' => $_POST['timestamp']
     );
     
     try {
@@ -82,7 +82,7 @@ $query = "DELETE FROM `ozbah_users` WHERE `user_event_id` = :eventid;
         ':currentnames' => $_POST['current'],
         ':waitingnames' => $_POST['waiting'],
         ':eventid' => $_POST['user_event_id'],
-		':modifiedon' => "CURRENT_TIMESTAMP"
+		':modifiedon' => $_POST['timestamp']
     );
     
     try {

@@ -44,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -99,6 +100,7 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
     public static final String TAG_USER_NAME = "user_name";
     public static final String TAG_CURRENT = "current";
     public static final String TAG_WAITING = "waiting";
+    public static final String TAG_TIMESTAMP = "timestamp";
 
 //    public static final String URL_USERS_LIST = "http://YOUR-WEBSITE-LINK/ozbah/usersList.php";
 //    public static final String URL_REGISTER_USERSS = "http://YOUR-WEBSITE-LINK/ozbah/registerUsers.php";
@@ -675,9 +677,11 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
         @Override
         protected String doInBackground(String... args) {
 
-
-
             try {
+                Calendar calendar = Calendar.getInstance();
+                java.sql.Timestamp ourJavaTimestampObject = new java.sql.Timestamp(calendar.getTime().getTime());
+                String timestamp = ourJavaTimestampObject.toString();
+                Log.d("timestamp" ,timestamp);
 
                 JSONParser jParser = new JSONParser();
                 // Building Parameters
@@ -685,6 +689,7 @@ public class OnlineGameActivity extends AppCompatActivity implements View.OnClic
                 params.add(new BasicNameValuePair(TAG_EVENT_ID, this.eventid));
                 params.add(new BasicNameValuePair(TAG_CURRENT, this.current));
                 params.add(new BasicNameValuePair(TAG_WAITING, this.waiting));
+                params.add(new BasicNameValuePair(TAG_TIMESTAMP, timestamp));
 
                 Log.d("request!", "starting New Event");
                 Log.d(TAG_EVENT_ID, eventid);
